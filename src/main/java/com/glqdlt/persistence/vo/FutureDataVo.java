@@ -18,6 +18,6 @@ import lombok.ToString;
 public class FutureDataVo {
 
 	private Future<List<CrawRawDataEntity>> future; 
-	private CrawDomainEntity cDomain;
+	private CrawDomainEntity crawDomainEntity;
 
 }

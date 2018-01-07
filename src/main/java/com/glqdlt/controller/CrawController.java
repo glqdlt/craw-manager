@@ -21,13 +21,13 @@ public class CrawController {
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	@RequestMapping(value = "/status")
 	public CrawStatusVo getStatus() {
-		CrawStatusVo cObj = new CrawStatusVo();
+		CrawStatusVo crawStatusVo = new CrawStatusVo();
 		Integer status = 0;
 		if (JobStatus.getInstance().getStatus() != 1) {
 			status = 1;
 		}
-		cObj.setStatus(status);
-		return cObj;
+		crawStatusVo.setStatus(status);
+		return crawStatusVo;
 	}
 
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -12,12 +11,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import com.glqdlt.persistence.entity.CrawRawDataEntity;
 import com.glqdlt.persistence.entity.CrawDomainEntity;
 
-@Component
+//@Component
 public abstract class ParserUtill {
 
 	private static final Logger log = LoggerFactory.getLogger(ParserUtill.class);
@@ -27,13 +25,13 @@ public abstract class ParserUtill {
 	
 	protected void checkNewHash() {
 
-		Document doc = null;
+		Document document = null;
 		String oldHash = null;
 		String newHash = null;
 
 		try {
-			doc = Jsoup.connect("url").get();
-			newHash = checkMD5(doc.toString());
+			document = Jsoup.connect("url").get();
+			newHash = checkMD5(document.toString());
 		} catch (IOException e) {
 			log.error("checkMD5 Error." + e);
 		}
@@ -76,13 +74,13 @@ public abstract class ParserUtill {
 		return fm1.format(new Date());
 	}
 
-	protected void setCommonData(CrawRawDataEntity crawObj, CrawDomainEntity cDomain) {
-		crawObj.setDataName(cDomain.getDataName());
-		crawObj.setDataTag(cDomain.getDataTag());
-		crawObj.setSiteName(cDomain.getSiteName());
-		crawObj.setSiteTag(cDomain.getSiteTag());
-		crawObj.setCrawNo(cDomain.getCrawNo());
-		crawObj.setCreatedTime(new Date());
+	protected void setCommonData(CrawRawDataEntity crawRawDataEntity, CrawDomainEntity crawDomainEntity) {
+		crawRawDataEntity.setDataName(crawDomainEntity.getDataName());
+		crawRawDataEntity.setDataTag(crawDomainEntity.getDataTag());
+		crawRawDataEntity.setSiteName(crawDomainEntity.getSiteName());
+		crawRawDataEntity.setSiteTag(crawDomainEntity.getSiteTag());
+		crawRawDataEntity.setCrawNo(crawDomainEntity.getCrawNo());
+		crawRawDataEntity.setCreatedTime(new Date());
 	}
 	
 	protected Integer parserBoardNo(String boardNo){
